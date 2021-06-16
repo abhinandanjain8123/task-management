@@ -1,0 +1,44 @@
+
+
+
+
+
+
+{% load static %}<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+    {% block stylesheet %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      ...
+    </header>
+    <main>
+      {% block content %}
+
+      <fieldset>
+		<legend><h1>List of Projects</h1></legend>
+			{% if latest_project_list %}
+				<ol>
+				{% for project in latest_project_list %}
+				    <li><a href="/project/{{ project.id }}/">{{ project.project_name }}</a></li>
+				{% endfor %}
+				</ol>
+			{% else %}
+			<p>No projects are available.</p>
+			{% endif %}
+		</fieldset>
+      
+      {% endblock %}
+    </main>
+    <footer>
+      ...
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    {% block javascript %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,58 @@
+
+{% block content %}
+
+<form action="{% url 'project:detail' project.id %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>{{ project.project_name }}</h1></legend>
+    <span>Desc : {{project.description}}</span>
+
+    <form action="{% url 'project:project_delete' project.pk %}" method="post">
+    	<input type="submit" value="Delete" />
+	  </form>
+
+    <form action="{% url 'project:project_delete' project.pk %}" method="post">
+      <input type="submit" value="Update" />
+    </form>
+
+    <br>
+    <br>
+    <b>Tasks:</b>
+    <br>
+
+
+
+     <table style="width:100%;border:1px solid grey">
+      <tr>
+      	<th>No.</th>
+        <th>Name</th>
+        <th>Desc</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      {% for task in project.project.all %}
+      <tr>
+      	<td>{{task.id}}</td>
+        <td contenteditable='true' data-id="task-{{task.id}}" data-old_value='{{task.task_name }}' onClick="highlightEdit(this);">{{task.task_name}}</td>
+        <td contenteditable='true' data-id="desc-{{task.id}}" data-old_value='{{task.description}}' onClick="highlightEdit(this);">{{task.task_description}}</td>
+        <td contenteditable='true' data-id="status-{{task.id}}" data-old_value='{{task.status}}' onClick="highlightEdit(this);">{{task.status}}</td>
+        <td>
+        </td>
+      </tr>
+      {%endfor%}
+    </table>
+
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    
+</fieldset>
+</form>
+
+
+<script>
+     
+  </script>
+
+{% endblock %}
+
+
