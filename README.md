@@ -1,4 +1,4 @@
-# pixeldust-task-management
+# task-management
 Assignment
  
 PROJECT RUN COMMAND : python manage.py runserver 
